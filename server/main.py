@@ -43,17 +43,34 @@ async def get_stocks(term: str, strategy: str):
 
 
 async def fetch_chart_data() -> None:
-    # TODO: call KIS API to fetch chart data
+    """Generate placeholder chart data and save it to disk."""
     os.makedirs("data", exist_ok=True)
     path = os.path.join("data", f"chart_{date.today()}.json")
+    # Simple dataset of random stock prices
+    data = {
+        "labels": ["AAA", "BBB", "CCC", "DDD"],
+        "values": [100, 80, 120, 60],
+    }
     with open(path, "w") as f:
-        json.dump({"message": "placeholder chart data"}, f)
+        json.dump(data, f)
 
 
 @app.post("/fetch-charts")
 async def schedule_fetch_charts(background_tasks: BackgroundTasks):
     background_tasks.add_task(fetch_chart_data)
     return {"status": "scheduled"}
+
+
+@app.get("/chart")
+async def get_chart():
+    """Return the latest chart data."""
+    path = os.path.join("data", f"chart_{date.today()}.json")
+    if not os.path.exists(path):
+        await fetch_chart_data()
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return {"labels": [], "values": []}
 
 
 if __name__ == "__main__":
