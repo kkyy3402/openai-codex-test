@@ -1,35 +1,34 @@
 # openai-codex-test
 
-This repository contains a sample Next.js + TypeScript client and a FastAPI server that demonstrates how to interact with the Korea Investment & Securities (KIS) API. The server exposes endpoints to query stocks based on short-term, medium-term and long-term strategies (qualitative or quantitative) and periodically fetches chart data for analysis. The client provides a minimal UI that fetches data from the server.
+이 저장소는 Next.js + TypeScript로 작성된 클라이언트와 FastAPI 기반 서버 예제를 포함합니다. 서버는 다양한 주식 및 차트 전략을 조회할 수 있는 API를 제공하며, 클라이언트는 간단한 UI로 해당 데이터를 표시합니다.
 
-## Structure
+## 구조
 
-- `client/` – Next.js application (app directory).
-- `server/` – FastAPI application.
-- `.gitignore` – ignores runtime files, node modules, and environment files.
+- `client/` – Next.js 애플리케이션
+- `server/` – FastAPI 애플리케이션
 
-## Usage
+## 사용 방법
 
-1. Copy `.env.example` to `.env` in both `client` and `server` directories and fill in the required values.
-2. Install dependencies:
+1. 서버와 클라이언트 디렉터리 각각에 `.env` 파일을 생성하여 필요한 값을 입력합니다.
+2. 의존성 설치:
 
 ```bash
 cd server && pip install -r requirements.txt
 cd ../client && npm install
 ```
 
-3. Run the API server:
+3. API 서버 실행:
 
 ```bash
 cd server
 uvicorn main:app --reload
 ```
 
-4. Start the Next.js development server:
+4. Next.js 개발 서버 실행:
 
 ```bash
 cd client
 npm run dev
 ```
 
-The client will fetch stock data from the FastAPI server.
+실행 후 브라우저에서 주식 전략과 차트 데이터를 확인할 수 있습니다.
